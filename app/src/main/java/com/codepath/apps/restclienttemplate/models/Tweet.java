@@ -1,7 +1,13 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import android.text.format.DateUtils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class Tweet {
     //list out the attributes
@@ -9,6 +15,7 @@ public class Tweet {
     public long uid; //database id for the tweet
     public User user;
     public String createdAt;
+    public String timestamp;
 
     //deserialize the JSON data
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {
@@ -19,9 +26,8 @@ public class Tweet {
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+        //tweet.timestamp = jsonObject.getString("created_at");
         return tweet;
 
     }
-
-
 }
