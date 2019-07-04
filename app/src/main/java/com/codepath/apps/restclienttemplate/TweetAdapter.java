@@ -78,8 +78,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvBody = itemView.findViewById(R.id.tvBody);
             timestamp = itemView.findViewById(R.id.timestamp);
             userHandle = itemView.findViewById(R.id.handle);
-
-
         }
 
     }
