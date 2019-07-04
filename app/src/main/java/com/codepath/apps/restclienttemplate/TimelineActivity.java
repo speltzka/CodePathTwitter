@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,9 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cz.msebera.android.httpclient.Header;
 
 import static com.loopj.android.http.AsyncHttpClient.log;
@@ -29,16 +33,16 @@ public class TimelineActivity extends AppCompatActivity {
     TwitterClient client;
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
-    RecyclerView rvTweets;
+    @BindView(R.id.rvTweet) RecyclerView rvTweets;
+    @BindView(R.id.swipeContainer) SwipeRefreshLayout swipeContainer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+        ButterKnife.bind(this);
         client = TwitterApp.getRestClient(this);
-        //find recyclerView
-        rvTweets = findViewById(R.id.rvTweet);
         //init the arrayList (data source)
         tweets = new ArrayList<>();
         //construct the adapter from this data source
@@ -47,7 +51,23 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
         //set the adapter
         rvTweets.setAdapter(tweetAdapter);
+        // Lookup the swipe container view
         populateTimeline();
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                populateTimeline();
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
 
     }
 
@@ -68,6 +88,8 @@ public class TimelineActivity extends AppCompatActivity {
                         tweets.add(tweet);
                         //notify the adapter that we've added an item
                         tweetAdapter.notifyItemInserted(tweets.size() - 1);
+                        //stop refresh icon from spinning
+                        swipeContainer.setRefreshing(false);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -85,16 +107,17 @@ public class TimelineActivity extends AppCompatActivity {
     static final int RESULT_OK = -1;
     static final int REQUEST_CODE = 200;
 
-    public void composeButtonClicked(View v) {   //AKA "launchComposeActivity
-        Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
-        startActivityForResult(i, REQUEST_CODE);
+    @OnClick(R.id.composeTweetButton)
+        public void composeButtonClicked() {   //AKA "launchComposeActivity
+            Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
+            startActivityForResult(i, REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            Tweet tweet = (Tweet) data.getSerializableExtra("tweet");
+            Tweet tweet = (Tweet) data.getParcelableExtra("tweet");
             tweets.add(0, tweet);
             tweetAdapter.notifyItemInserted(0);
             rvTweets.scrollToPosition(0);
