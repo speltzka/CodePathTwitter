@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textColor="#ffffff"
     tools:context=".ComposeActivity">
 
     <android.support.design.widget.TextInputLayout
@@ -13,6 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:textColor="#ffffff"
         app:counterEnabled="true"
         app:counterMaxLength="280"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,8 +29,11 @@
             android:layout_marginTop="56dp"
             android:layout_marginEnd="8dp"
             android:ems="100"
+            android:backgroundTint="#ffffff"
             android:hint="Type new tweet here"
             android:inputType="textPersonName"
+            android:textColor="#ffffff"
+            android:textColorHighlight="#00FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,6 +48,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Post Tweet"
+        android:textColor="#38A1F3"
+        android:background= "@drawable/rounded_corners"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

@@ -16,6 +16,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +37,12 @@ public class ComposeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
         ButterKnife.bind(this);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            String newText = extras.getString("user") + " ";
+            tweetPostText.setText(newText);
+        }
         client= TwitterApp.getRestClient(this);
 
         //this is how you set an onClickListener without Butterknife
@@ -64,7 +71,7 @@ public class ComposeActivity extends AppCompatActivity {
                     Tweet tweet = Tweet.fromJSON(response);
                     Intent data = new Intent();
                     // Pass relevant data back as a result
-                    data.putExtra("tweet", data.getParcelableExtra("tweet"));
+                    data.putExtra("tweet", Parcels.wrap(tweet));
                     // Activity finished ok, return the data
                     setResult(RESULT_OK, data); // set result code and bundle data for response
                     finish(); // closes the activity, pass data to parent
@@ -81,7 +88,7 @@ public class ComposeActivity extends AppCompatActivity {
 
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             //This sets a textview to the current length
-            tweetPostText.setText(String.valueOf(s.length()));
+          //  tweetPostText.setText((280- s.length()));
         }
 
         public void afterTextChanged(Editable s) {

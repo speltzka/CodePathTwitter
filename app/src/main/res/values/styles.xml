@@ -1,11 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- For honeycomb and up -->
 <resources>
-    <!-- Base application theme. -->
+
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!-- This is the styling for action bar -->
-        <item name="colorPrimary">#38A1F3</item>
+        <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
+        <item name="android:background">#38A1F3</item>
+        <item name="android:textColorHint">#ffffff</item>
+        <item name="colorControlActivated">#C0C0C0</item>
     </style>
 
-    <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">#ffffff</item>
+    <style name="Widget.Styled.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="titleTextStyle">@style/ActionBarTitleText</item>
     </style>
+
+    <style name="ActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">#38A1F3</item>
+    </style>
+
+
 </resources>
