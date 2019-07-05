@@ -7,37 +7,23 @@
     android:textColor="#ffffff"
     tools:context=".ComposeActivity">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textContainer"
-        android:layout_width="0dp"
-        android:layout_height="107dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+
+    <EditText
+        android:id="@+id/tweetPostText"
+        android:layout_width="363dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#ffffff"
+        android:ems="100"
+        android:hint="Type new tweet here"
+        android:inputType="textPersonName"
         android:textColor="#ffffff"
-        app:counterEnabled="true"
-        app:counterMaxLength="280"
+        android:textColorHighlight="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/tweetPostText"
-            android:layout_width="363dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="8dp"
-            android:ems="100"
-            android:backgroundTint="#ffffff"
-            android:hint="Type new tweet here"
-            android:inputType="textPersonName"
-            android:textColor="#ffffff"
-            android:textColorHighlight="#00FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.design.widget.TextInputLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/postButton"
@@ -46,15 +32,29 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="496dp"
+        android:background="@drawable/rounded_corners"
         android:text="Post Tweet"
         android:textColor="#38A1F3"
-        android:background= "@drawable/rounded_corners"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textContainer"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintTop_toBottomOf="@+id/tweetPostText"
+        app:layout_constraintVertical_bias="0.674" />
+
+    <TextView
+        android:id="@+id/charCount"
+        android:layout_width="41dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="#FFFFFF"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/postButton"
+        app:layout_constraintTop_toBottomOf="@+id/tweetPostText" />
 
 </android.support.constraint.ConstraintLayout>

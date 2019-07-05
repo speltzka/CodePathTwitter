@@ -9,6 +9,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -29,6 +31,7 @@ public class ComposeActivity extends AppCompatActivity {
 
     @BindView(R.id.tweetPostText) EditText tweetPostText;
     @BindView(R.id.postButton) Button postButton;
+    @BindView(R.id.charCount) TextView charCount;
     TwitterClient client;
 
 
@@ -54,6 +57,19 @@ public class ComposeActivity extends AppCompatActivity {
                 }
                 */
 
+            tweetPostText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) { }
+                @Override
+                public void afterTextChanged(Editable s)
+                {
+                    String newText = String.valueOf (280 - tweetPostText.length());
+                    log.i("here", newText);
+                    charCount.setText(newText);
+                }
+            });
         }
 
     //Butterknife method
@@ -81,18 +97,5 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
     }
-
-    private final TextWatcher mTextEditorWatcher = new TextWatcher() {
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            //This sets a textview to the current length
-          //  tweetPostText.setText((280- s.length()));
-        }
-
-        public void afterTextChanged(Editable s) {
-        }
-    };
 }
 
