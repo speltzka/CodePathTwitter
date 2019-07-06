@@ -81,6 +81,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                     .load(entityUrl)
                     .into(holder.ivPicture);
         }
+        else{
+            holder.ivPicture.setVisibility(View.GONE);
+        }
 
 
     }
