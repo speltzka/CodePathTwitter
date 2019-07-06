@@ -68,7 +68,6 @@ public class TimelineActivity extends AppCompatActivity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
                 populateTimeline();
                 log.i("trying to refresh", "refreshing");
                 swipeContainer.setRefreshing(false);
@@ -91,7 +90,6 @@ public class TimelineActivity extends AppCompatActivity {
     private void populateTimeline() {
         showProgressBar();
         client.getHomeTimeline(new JsonHttpResponseHandler() {
-
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

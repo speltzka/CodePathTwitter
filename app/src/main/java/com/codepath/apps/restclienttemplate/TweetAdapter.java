@@ -12,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+
+
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
@@ -65,21 +69,21 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             }
         });
 
+
         Glide.with(context)
                 .load(tweet.user.profileImageUrl)
-              //  .placeholder(R.drawable.placeholder)
-                //.error(R.drawable.imagenotfound)
                 .into(holder.ivProfileImage);
 
-      /*  Glide.with(context)
-                .load(tweet.pictureUrl)
-                //  .placeholder(R.drawable.placeholder)
-                //.error(R.drawable.imagenotfound)
-                .into(holder.ivPicture);
-*/
-
-
+        if (tweet.hasEntities){
+            String entityUrl = tweet.entity.loadUrl;
+            holder.ivPicture.setVisibility(View.VISIBLE);
+            Glide.with(context)
+                    .load(entityUrl)
+                    .into(holder.ivPicture);
         }
+
+
+    }
 
 
     public int getItemCount(){

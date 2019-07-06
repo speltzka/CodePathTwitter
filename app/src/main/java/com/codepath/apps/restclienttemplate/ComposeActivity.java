@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,6 +60,7 @@ public class ComposeActivity extends AppCompatActivity {
                 */
 
             tweetPostText.addTextChangedListener(new TextWatcher() {
+                int startLength = tweetPostText.length();
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
                 @Override
@@ -65,7 +68,7 @@ public class ComposeActivity extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable s)
                 {
-                    String newText = String.valueOf (280 - tweetPostText.length());
+                    String newText = String.valueOf (280 - tweetPostText.length() + startLength);
                     log.i("here", newText);
                     charCount.setText(newText);
                 }
@@ -76,7 +79,9 @@ public class ComposeActivity extends AppCompatActivity {
     @OnClick(R.id.postButton)
     public void onClick() {
         String text = tweetPostText.getText().toString();
+       // showProgressBar();
         postMyTweet(text);
+       // hideProgressBar();
     }
 
     public void postMyTweet(String message) {
@@ -97,5 +102,34 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    /*
+    // Instance of the progress action-view
+    MenuItem miActionProgressItem;
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu, String text) {
+        // Store instance of the menu item containing progress
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        postMyTweet(text);
+        // Return to finish
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    public void showProgressBar() {
+        // Show progress item
+        miActionProgressItem.setVisible(true);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        miActionProgressItem.setVisible(false);
+    }
+    */
 }
 
