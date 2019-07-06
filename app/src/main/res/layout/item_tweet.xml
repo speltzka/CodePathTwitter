@@ -99,9 +99,9 @@
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="8dp"
-        android:background="#ffffff"/>
+        app:layout_constraintGuide_percent="0.0" />
 
     <ImageView
         android:id="@+id/ivPicture"
@@ -119,5 +119,15 @@
         app:layout_constraintTop_toBottomOf="@+id/tvBody"
         app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <View
+        android:layout_width="395dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="7dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/tvUserName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

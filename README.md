@@ -46,6 +46,9 @@ The following **bonus** features are implemented:
 The following **additional** features are implemented:
 
 * [ ] List anything else that you can get done to improve the app functionality!
+* [x] Timeline shows pictures that are part of tweets (User can see embedded image media within a tweet)
+* [x] Floating action button implemented
+* [x] Autolinks implemented (Links in tweets are clickable and will launch the web browser
 
 ## Video Walkthrough
 
